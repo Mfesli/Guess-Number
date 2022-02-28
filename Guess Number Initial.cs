@@ -76,124 +76,141 @@ public class Program
 		//////////////////////////////////////////////////////////////////////////////////	
 		//////////////////////////////////////////////////////////////////////////////////
 
-		//Declaring the variables
-		int LowNum = 1;
-		int HighNum = 100;
-		int ComputerNumGuess;
-		string UserAnswer = "0";
-		int NumberOfCompTry = 0;
-		int UserNumber = 0;
-		int NumberOfUserTry = 0;
-		int ComputerRandomNumber;
-		bool UserReady = false;
-
-		// Turn-1: Computer will guess and find the number that the user chose randomly.
-		while (UserReady == false)
+		while (true)
 		{
-			Console.WriteLine("Please hold a number between 1-100 in your mind.\n");
-			Console.WriteLine("Are you ready? <Y> for Yes");
-			Char AreYouReady = Char.Parse(Console.ReadLine().ToUpper());
-			if (AreYouReady == 'Y')
-			{ UserReady = true; }
-			Console.Clear();
-		}
-		if (UserReady)
-		{
-			Console.WriteLine("Allright!!\nLet me start to gueess your number!!\n");
-		}
+			//Declaring the variables
+				int LowNum = 1;
+				int HighNum = 100;
+				int ComputerNumGuess;
+				string UserAnswer = "";
+				int NumberOfCompTry = 0;
+				int UserNumber = 0;
+				int NumberOfUserTry = 0;
+				int ComputerRandomNumber;
+				bool UserReady = false;
 
-		// Binary Search process is starting.
-
-		while (UserAnswer != "1")
-		{
-			ComputerNumGuess = (HighNum + LowNum - 1) / 2;
-			Console.WriteLine("Is your number " + ComputerNumGuess + "?\n");
-			Console.WriteLine("<1> for Yes\n<2> for Guess a Lower Number\n<3> Guess a Higher Number\n");
-			UserAnswer = Console.ReadLine();
-			Console.Clear();
-			switch (UserAnswer)
+			// Turn-1: Computer will guess and find the number that the user chose randomly.
+			while (UserReady == false)
 			{
-				case "1": //The number that the computer gussed is same as the number that user hold.
-					Console.Clear();
-					Console.WriteLine("I found your number in " + (NumberOfCompTry + 1) + " attempts.\n");
-					break;
-
-				case "2": //The number that the computer gussed is higher than the number that user hold.
-					Console.Clear();
-					Console.WriteLine("I am guessing again!!!\n");
-					HighNum = ComputerNumGuess - 1;
-					break;
-
-				case "3": //The number that the computer gussed is lower than the number that user hold.
-					Console.Clear();
-					Console.WriteLine("I am guessing again!!!\n");
-					LowNum = ComputerNumGuess + 1;
-					break;
-
-				default:
-					Console.Clear();
-					Console.WriteLine("Wrong Enter!!!\n");
-					break;
-			}
-			NumberOfCompTry++;
-		}
-
-		// Turn-2: User will guess and find the number that the computer chose randomly.			
-		UserReady = false;
-		while (UserReady == false)
-		{
-			Console.WriteLine("Now your turn.\nI hold a number between 1-100\n");
-			Console.WriteLine("And you should try to find the number that I hold it.\n");
-			Console.WriteLine("Are you ready? <Y> for Yes");
-			Char AreYouReady = Char.Parse(Console.ReadLine().ToUpper());
-			if (AreYouReady == 'Y')
-			{ UserReady = true; }
-			Console.Clear();
-		}
-		if (UserReady)
-		{
-			Console.WriteLine("Allright!!\nLet us start to game!!\n");
-		}
-		Random rnd = new();
-		ComputerRandomNumber = rnd.Next(101);
-		
-		Console.WriteLine("Please guess a number between 1-100");
-		while (UserNumber != ComputerRandomNumber)
-		{
-			UserNumber = int.Parse(Console.ReadLine());
-			Console.WriteLine(ComputerRandomNumber);
-			if (UserNumber < ComputerRandomNumber)
-			{
+				Console.WriteLine("Please hold a number between 1-100 in your mind.\n");
+				Console.WriteLine("Are you ready? <Y> for Yes");
+                Char AreYouReady = Char.Parse(Console.ReadLine().ToUpper());
+                if (AreYouReady == 'Y')
+				{ UserReady = true; }
 				Console.Clear();
-				Console.WriteLine("Please guess a higher number.\n");
+			}
+			if (UserReady)
+			{
+				Console.WriteLine("Allright!!\nLet me start to gueess your number!!\n");
 			}
 
-			else if (UserNumber > ComputerRandomNumber)
+			// Binary Search process is starting.
+
+			while (UserAnswer != "1")
 			{
+				ComputerNumGuess = (HighNum + LowNum - 1) / 2;
+				Console.WriteLine("Is your number " + ComputerNumGuess + "?\n");
+				Console.WriteLine("<1> for Yes\n<2> for Guess a Lower Number\n<3> Guess a Higher Number\n");
+				UserAnswer = Console.ReadLine();
 				Console.Clear();
-				Console.WriteLine("Please guess a lower number.\n");
+				switch (UserAnswer)
+				{
+					case "1": //The number that the computer gussed is same as the number that user hold.
+						Console.Clear();
+						Console.WriteLine("I found your number in " + (NumberOfCompTry + 1) + " attempts.\n");
+						break;
 
+					case "2": //The number that the computer gussed is higher than the number that user hold.
+						Console.Clear();
+						Console.WriteLine("I am guessing again!!!\n");
+						HighNum = ComputerNumGuess - 1;
+						break;
+
+					case "3": //The number that the computer gussed is lower than the number that user hold.
+						Console.Clear();
+						Console.WriteLine("I am guessing again!!!\n");
+						LowNum = ComputerNumGuess + 1;
+						break;
+
+					default:
+						Console.Clear();
+						Console.WriteLine("Wrong Enter!!!\n");
+						break;
+				}
+				NumberOfCompTry++;
 			}
 
-			else
+			// Turn-2: User will guess and find the number that the computer chose randomly.			
+			UserReady = false;
+			while (UserReady == false)
 			{
-				Console.Clear(); 
-				Console.WriteLine("You found my number in " + (NumberOfUserTry + 1) + " attempts.\n");
+				Console.WriteLine("Now your turn.\nI hold a number between 1-100\n");
+				Console.WriteLine("And you should try to find the number that I hold it.\n");
+				Console.WriteLine("Are you ready? <Y> for Yes");
+				Char AreYouReady = Char.Parse(Console.ReadLine().ToUpper());
+				if (AreYouReady == 'Y')
+				{ UserReady = true; }
+				Console.Clear();
 			}
-			NumberOfUserTry++;
-		}
-		// Who is the Winner: Computer will compare the number of Computer and User attempts and find the winner of the game.
+			if (UserReady)
+			{
+				Console.WriteLine("Allright!!\nLet us start to game!!\n");
+			}
+			Random rnd = new();
+			ComputerRandomNumber = rnd.Next(101);
+
+			Console.WriteLine("Please guess a number between 1-100");
+			while (UserNumber != ComputerRandomNumber)
+			{
+				UserNumber = int.Parse(Console.ReadLine());
+				Console.WriteLine(ComputerRandomNumber);
+				if (UserNumber < ComputerRandomNumber)
+				{
+					Console.Clear();
+					Console.WriteLine("Please guess a higher number.\n");
+				}
+
+				else if (UserNumber > ComputerRandomNumber)
+				{
+					Console.Clear();
+					Console.WriteLine("Please guess a lower number.\n");
+
+				}
+
+				else
+				{
+					Console.Clear();
+					Console.WriteLine("You found my number in " + (NumberOfUserTry + 1) + " attempts.\n");
+				}
+				NumberOfUserTry++;
+			}
+			// Who is the Winner: Computer will compare the number of Computer and User attempts and find the winner of the game.
 			if (NumberOfCompTry == NumberOfUserTry)
-				{
-					Console.WriteLine("Congrulations. You both tried so hard, but there is no winner of this game.\nThe result is a DRAW!");
-				}
+			{
+				Console.WriteLine("Congrulations. You both tried so hard, but there is no winner of this game.\nThe result is a DRAW!");
+			}
 			else if (NumberOfUserTry < NumberOfCompTry)
-				{
-					Console.WriteLine("Congrulations to User.\nYou are the winner of this game with " + NumberOfUserTry + " attempts.\n");
-				}
+			{
+				Console.WriteLine("Congrulations to User.\nYou are the winner of this game with " + NumberOfUserTry + " attempts.\n");
+			}
 			else
+			{
+				Console.WriteLine("Congrulations to Computer.\nYou are the winner of this game with " + NumberOfCompTry + " attempts.\n");
+			}
+			while (true) // Continue asking until a correct answer is given.
+			{
+				Console.Write("Do you want to play again [Y/N]?");
+				string answer = Console.ReadLine().ToUpper();
+				if (answer == "Y")
 				{
-					Console.WriteLine("Congrulations to Computer.\nYou are the winner of this game with " + NumberOfCompTry + " attempts.\n");
+					Console.Clear();
+					break; // Exit the inner while-loop and continue in the outer while loop.
 				}
+				else
+				{
+					return; // Exit the Main-method.
+				}
+			}
+		}	
 	}
 }
